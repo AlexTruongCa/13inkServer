@@ -3,7 +3,7 @@ logs
 *.log
 
 node_modules
-dist
+
 
 *.local
 
@@ -11,6 +11,8 @@ dist
 .vscode/*
 
 .env
+
+
 
 
 # Local Netlify folder
