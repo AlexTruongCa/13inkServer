@@ -23,7 +23,7 @@ router.get("/", async (req, res) => {
         Authorization: `Bearer ${process.env.INSTAGRAM_TOKEN}`,
       },
     });
-    console.log("---response body---", response.body);
+    console.log("---response body---", response);
     if (!response.ok) {
       throw new Error("Failed to fetch data from Instagram API");
     }
@@ -37,6 +37,7 @@ router.get("/", async (req, res) => {
       console.log("Response body:", responseBody);
       throw new Error("Response is not in JSON format");
     }
+    console.log("---response json---", response.json);
   } catch (error) {
     console.log("Error", error);
     res.status(500).json({ error });
