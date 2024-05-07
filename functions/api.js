@@ -14,39 +14,33 @@ app.use(cors());
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const response = await fetch(url1, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${process.env.INSTAGRAM_TOKEN}`,
-    },
-  });
-  const apiResponseJson = await response.json();
-  res.send(apiResponseJson);
+  console.log("function log");
 
-  // try {
-  //   const response = await fetch(url1, {
-  //     method: "GET",
-  //     headers: {
-  //       Authorization: `Bearer ${process.env.INSTAGRAM_TOKEN}`,
-  //     },
-  //   });
-  //   if (!response.ok) {
-  //     throw new Error("Failed to fetch data from Instagram API");
-  //   }
+  try {
+    const response = await fetch(url1, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.INSTAGRAM_TOKEN}`,
+      },
+    });
+    console.log("---response body---", response.body);
+    if (!response.ok) {
+      throw new Error("Failed to fetch data from Instagram API");
+    }
 
-  //   const contentType = response.headers.get("content-type");
-  //   if (contentType && contentType.includes("application/json")) {
-  //     const apiResponseJson = await response.json();
-  //     res.json(apiResponseJson);
-  //   } else {
-  //     const responseBody = await response.text();
-  //     console.log("Response body:", responseBody);
-  //     throw new Error("Response is not in JSON format");
-  //   }
-  // } catch (error) {
-  //   console.error("Error", error);
-  //   res.status(500).json({ error: "Internal Server Error" });
-  // }
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      const apiResponseJson = await response.json();
+      res.json(apiResponseJson);
+    } else {
+      const responseBody = await response.text();
+      console.log("Response body:", responseBody);
+      throw new Error("Response is not in JSON format");
+    }
+  } catch (error) {
+    console.log("Error", error);
+    res.status(500).json({ error });
+  }
   // console.log(apiResponseJson);
 });
 
