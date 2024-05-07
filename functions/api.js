@@ -28,11 +28,17 @@ router.get("/", async (req, res) => {
 
     const contentType = response.headers.get("content-type");
     if (contentType && contentType.includes("application/json")) {
-      const apiResponseJson = await response.json();
-      res.json(apiResponseJson);
+      let jsonData;
+      try {
+        jsonData = await response.json();
+      } catch (error) {
+        throw new Error("Failed to parse JSON response");
+      }
+      // const apiResponseJson = await response.json();
+      res.json(jsonData);
     } else {
-      const responseBody = await response.text();
-      console.log("Response body:", responseBody);
+      // const responseBody = await response.text();
+      // console.log("Response body:", responseBody);
       throw new Error("Response is not in JSON format");
     }
   } catch (error) {
