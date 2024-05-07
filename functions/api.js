@@ -31,7 +31,6 @@ router.get("/", async (req, res) => {
       let jsonData;
       try {
         jsonData = await response.json();
-        instagramData = jsonData;
       } catch (error) {
         throw new Error("Failed to parse JSON response");
       }
@@ -47,22 +46,6 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
   // console.log(apiResponseJson);
-});
-
-router.post("/", async (req, res) => {
-  try {
-    // Access the stored data in the POST request handler
-    if (instagramData) {
-      // Process the data as needed
-      // For example, you can use it in the response body
-      res.status(200).json({ instagramData });
-    } else {
-      res.status(404).json({ error: "Instagram data not available" });
-    }
-  } catch (error) {
-    console.error("Error", error);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
 });
 
 app.use("/", router);
