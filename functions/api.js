@@ -14,7 +14,15 @@ app.use(cors());
 const router = Router();
 
 router.get("/", async (req, res) => {
-  console.log("function log");
+  console.log(req.headers.token);
+  console.log(req.headers.authorization);
+
+  if (req.headers.token !== process.env.CLIENT_TOKEN) {
+    res.status(401).json({ error: "Not Authorized" });
+    throw new Error("Not Authorized");
+  }
+
+  // console.log("function log");
 
   try {
     const response = await fetch(url1, {

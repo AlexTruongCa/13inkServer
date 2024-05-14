@@ -11,3 +11,9 @@ functions="functions"
   to = "/.netlify/functions/api/:splat"
   status = 200
   
+[[headers]]
+  for = "/*"
+  [headers.values]
+  token = '''
+  authorization = '''
+  
