@@ -14,7 +14,7 @@ app.use(cors());
 const router = Router();
 
 router.get("/", async (req, res) => {
-  console.log("banana token", req.query);
+  // console.log("banana token", req.query);
 
   if (req.headers.token !== process.env.CLIENT_TOKEN) {
     res.status(401).json({ error: "Not Authorized" });
@@ -30,7 +30,6 @@ router.get("/", async (req, res) => {
         Authorization: `Bearer ${process.env.INSTAGRAM_TOKEN}`,
       },
     });
-    console.log("---response body---", response);
     if (!response.ok) {
       throw new Error("Failed to fetch data from Instagram API");
     }
@@ -49,7 +48,6 @@ router.get("/", async (req, res) => {
     console.log("Error", error);
     res.status(500).json({ error });
   }
-  // console.log(apiResponseJson);
 });
 
 app.use("/", router);
