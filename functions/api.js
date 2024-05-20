@@ -20,6 +20,8 @@ router.get("/", async (req, res) => {
     res.status(401).json({ error: "Not Authorized" });
     throw new Error("Not Authorized");
   }
+  console.log("client token", req.headers.token);
+  console.log("server token", process.env.VITE_CLIENT_TOKEN);
 
   try {
     const response = await fetch(url1, {
