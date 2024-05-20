@@ -14,7 +14,7 @@ app.use(cors());
 const router = Router();
 
 router.get("/", async (req, res) => {
-  // console.log("banana token", req.query);
+  console.log("banana token", req.query);
 
   if (req.headers.token !== process.env.CLIENT_TOKEN) {
     res.status(401).json({ error: "Not Authorized" });
