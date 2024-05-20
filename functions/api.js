@@ -16,10 +16,10 @@ app.use(express.json());
 const router = Router();
 
 router.get("/", async (req, res) => {
-  // if (req.headers.token !== process.env.VITE_CLIENT_TOKEN) {
-  //   res.status(401).json({ error: "Not Authorized" });
-  //   throw new Error("Not Authorized");
-  // }
+  if (req.headers.token !== process.env.VITE_CLIENT_TOKEN) {
+    res.status(401).json({ error: "Not Authorized" });
+    throw new Error("Not Authorized");
+  }
 
   try {
     const response = await fetch(url1, {
